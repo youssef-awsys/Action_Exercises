@@ -1,7 +1,0 @@
-package Animal;
-
-public class Monkey{
-    public String makeSound() {
-        return "oh ah oh ah";
-    }
-}

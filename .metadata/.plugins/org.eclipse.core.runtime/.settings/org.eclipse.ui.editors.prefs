@@ -1,7 +1,0 @@
-comment_stylePreferences=NONE
-comment_text=false
-eclipse.preferences.version=1
-net.sf.eclipsecs.error.color=128,0,0
-net.sf.eclipsecs.error.highlight=false
-net.sf.eclipsecs.error.text=true
-net.sf.eclipsecs.error.text.style=UNDERLINE

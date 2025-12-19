@@ -1,6 +1,5 @@
 package comm.leapyear;
 
-
 public final class LeapYear {
     /**
      *

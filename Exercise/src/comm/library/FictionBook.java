@@ -1,5 +1,6 @@
 package comm.library;
 
+
 public class FictionBook extends Book {
     /**
      *

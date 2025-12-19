@@ -1,5 +1,0 @@
-package AbstractPractice;
-
-public abstract class AbstractPrac {
-    public abstract void sound();
-}
