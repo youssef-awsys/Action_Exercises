@@ -1,0 +1,13 @@
+package comm.library;
+
+public class FictionBook extends Book {
+    /**
+     *
+     * @param title
+     * @param author
+     * @param yearPublished
+     */
+    public FictionBook(final String title, String author, int yearPublished) {
+        super(title, author, yearPublished);
+    }
+}

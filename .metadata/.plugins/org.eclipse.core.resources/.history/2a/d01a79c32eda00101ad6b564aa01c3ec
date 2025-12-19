@@ -1,0 +1,51 @@
+package comm.leapyear;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+
+import comm.leapyear.LeapYear.CheckLeapYear;
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+class LeapYearTest {
+    @Order(1)
+    @Test
+    void testIsLeapYear_IfDivisibleBy400_true() {
+        LeapYear leapYear = new LeapYear(2000);
+        assertEquals(true, leapYear);
+        leapYear.main(null);
+        }
+    @Order(2)
+    @Test
+    void testIsLeapYear_IfDisibleBy100ButNot400_false() {
+        LeapYear leapYear = new LeapYear(1900);
+        assertEquals(false, leapYear);
+        }
+    @Order(3)
+    @Test
+    void testIsLeapYear_IfDisibleBy4ButNot100_true() {
+        LeapYear leapYear = new LeapYear(2016);
+        assertEquals(true, leapYear);
+        }
+    @Order(4)
+    @Test
+    void testIsLeapYear_IfNotDisibleBy4_false() {
+        LeapYear leapYear = new LeapYear(2017);
+        assertEquals(false, leapYear);
+        }
+    @Order(5)
+    @Test
+    void testIsLeapYear_RandomLeapYear_true() {
+        LeapYear leapYear = new LeapYear(1996);
+        assertEquals(true, leapYear);
+        }
+    @Order(6)
+    @Test
+    void testIsLeapYear_RandomNotLeapYear_false() {
+        LeapYear leapYear = new LeapYear(1877);
+        assertEquals(false, leapYear);
+        }
+}

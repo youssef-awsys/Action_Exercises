@@ -1,0 +1,24 @@
+package Animal;
+
+public class Animal {
+    private String type;
+    public int age;
+    public String nameM = "NameM";
+    
+    public Animal(int age) {
+        this.age = age;
+    }
+    
+    public void setType(String type) {
+        this.type = type;
+    }
+    
+    public String getType() {
+        return type;
+    }   
+    
+    public static void main(String[] args) {
+        Monkey monkey = new Monkey();
+        monkey.setDetails();
+    }
+}

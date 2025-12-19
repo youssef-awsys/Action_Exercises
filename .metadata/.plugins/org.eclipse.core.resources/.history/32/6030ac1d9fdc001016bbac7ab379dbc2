@@ -1,0 +1,17 @@
+package AbstractPractice;
+
+public class Triangle extends Shape {
+
+    
+    public void calculateArea() {
+        System.out.println("Calculate Triangle Area");
+        
+    }
+
+    
+    public void calculatePerimeter() {
+        // TODO Auto-generated method stub
+        System.out.println("Calculate Triangle Perimeter");
+    }
+
+}

@@ -1,0 +1,47 @@
+package comm.leapyear;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+
+import comm.leapyear.LeapYear.CheckLeapYear;
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+class LeapYearTest {
+    @Order(1)
+    @Test
+    void testInput_IfDisibleBy400_IsLeapYear() {
+        LeapYear leapYear = new LeapYear(2000);
+        assertEquals(true, leapYear);
+        leapYear.main(null);
+        System.out.println(leapYear.isLeapYear());    }
+    @Order(2)
+    @Test
+    void testInput_IfDisibleBy100ButNot400_IsNotLeapYear() {
+        LeapYear leapYear = new LeapYear(1900);
+        assertEquals(true, leapYear);
+        System.out.println(leapYear.isLeapYear());    }
+    @Order(3)
+    @Test
+    void testInput_IfDisibleBy4ButNot100_IsLeapYear() {
+        LeapYear leapYear = new LeapYear(2016);
+        System.out.println(leapYear.isLeapYear());    }
+    @Order(4)
+    @Test
+    void testInput_IfNotDisibleBy4_IsNotLeapYear() {
+        LeapYear leapYear = new LeapYear(2017);
+        System.out.println(leapYear.isLeapYear());    }
+    @Order(5)
+    @Test
+    void testRandomLeapYear() {
+        LeapYear leapYear = new LeapYear(1996);
+        System.out.println(leapYear.isLeapYear());    }
+    @Order(6)
+    @Test
+    void testRandomNotLeapYear() {
+        LeapYear leapYear = new LeapYear(1877);
+        System.out.println(leapYear.isLeapYear());    }
+}

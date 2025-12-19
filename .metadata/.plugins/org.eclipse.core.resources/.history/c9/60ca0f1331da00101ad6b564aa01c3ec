@@ -1,0 +1,57 @@
+package comm.leapyear;
+
+public final class LeapYear {
+    /**
+     *
+     */
+    private int year1;
+    LeapYear(final int year1) {
+        this.year1 = year1;
+    }
+    public static class CheckLeapYear {
+        /**
+         *
+         */
+        private int year;
+        /**
+         *
+         * @param currentYear
+         */
+        public CheckLeapYear(final int currentYear) {
+            this.year = currentYear;
+        }
+        /**
+         *
+         * @return boolean
+         */
+        public boolean isLeapYear() {
+            final int x = 4;
+            final int y = 100;
+            final int z = 400;
+            if (year % x == 0 && year % y != 0) {
+                return true;
+            } else if (year % z == 0) {
+                return true;
+            }
+            return false;
+        }
+    }
+    /**
+     *
+     * @param args
+     */
+    public static void main(final String[] args) {
+        final int yearA = 2000;
+        final int yearB = 2001;
+        final int yearC = 2016;
+        final int yearD = 2017;
+        CheckLeapYear year1 = new CheckLeapYear(yearA);
+        System.out.println(year1.isLeapYear());
+        CheckLeapYear year2 = new CheckLeapYear(yearB);
+        System.out.println(year2.isLeapYear());
+        CheckLeapYear year3 = new CheckLeapYear(yearC);
+        System.out.println(year3.isLeapYear());
+        CheckLeapYear year4 = new CheckLeapYear(yearD);
+        System.out.println(year4.isLeapYear());
+    }
+}

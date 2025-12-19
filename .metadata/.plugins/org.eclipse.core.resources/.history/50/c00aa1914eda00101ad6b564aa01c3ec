@@ -1,0 +1,85 @@
+package comm.library;
+
+import java.util.ArrayList;
+
+public final class BookRentalSystem {
+    /**
+     *
+     */
+    private BookRentalSystem() {
+        super();
+    }
+    /**
+     *
+     */
+    private static ArrayList<Book> library = new ArrayList<>();
+    /**
+     *
+     * @param args
+     */
+    public static void main(final String[] args) {
+        addBooks();
+        for (Book book : library) {
+            book.display();
+        }
+        rentBooks();
+    }
+    /**
+     *
+     */
+    public static void addBooks() {
+        final int[] year = {1954, 1960, 2000, 1997};
+        final int three = 3;
+        library.add(new FictionBook(
+                "The Lord of the Rings",
+                "J.R.R. Tolkien",
+                year[0]));
+        library.add(new FictionBook(
+                "To Kill a Mockingbird",
+                "Harper Lee",
+                year[1]));
+        library.add(new NonFictionBook(
+                "The Tipping Point",
+                "M. Gladwell",
+                year[2]));
+        library.add(new NonFictionBook(
+                "Guns, Germs, and Steel",
+                "Jared Diamond ",
+                year[three]));
+    }
+    /**
+     *
+     * @param book
+     */
+    public static void addBooks(final Book book) {
+        library.add(book);
+    }
+    /**
+     *
+     */
+    public static void rentBooks() {
+        System.out.println("Books rented: ");
+        library.get(0).rent();
+        library.get(2).rent();
+    }
+    /**
+    * @param 
+    */
+    public static void rentBooks(final Book book) {
+        book.rent();
+    }
+    /**
+     *
+     */
+    public static void clearLibrary() {
+        library.clear();
+    }
+    /**
+     *
+     * @return size of library
+     */
+    public static int getLibrarySize() {
+        return library.size();
+    }
+
+}

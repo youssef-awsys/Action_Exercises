@@ -1,0 +1,5 @@
+package AbstractPractice;
+
+public interface Animal {
+    String bark();
+}

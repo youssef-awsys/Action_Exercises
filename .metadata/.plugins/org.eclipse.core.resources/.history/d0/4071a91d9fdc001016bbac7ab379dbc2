@@ -1,0 +1,11 @@
+package Animal;
+
+public class Animal {  
+    public static void displaySound(Monkey m) {
+        System.out.println(m.makeSound());
+    }
+    public static void main(String[] args) {
+        displaySound(new Monkey());
+        displaySound(new Orangutan());
+    }
+}

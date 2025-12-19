@@ -1,0 +1,10 @@
+package AbstractPractice;
+
+public class Lion extends AbstractPrac {
+
+    public void sound() {
+        // TODO Auto-generated method stub
+        
+    }
+    
+}

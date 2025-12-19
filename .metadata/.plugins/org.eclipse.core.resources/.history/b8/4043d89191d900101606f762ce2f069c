@@ -1,0 +1,31 @@
+package comm.library;
+
+public class Book {
+    private String title;
+    private String author;
+    private int yearPublished;
+    private boolean isRented;
+    
+    public Book(String title, String author, int yearPublished) {
+        this.title = title;
+        this.author = author;
+        this.yearPublished = yearPublished;
+        this.isRented = false;
+    }
+    
+    public boolean isRented() {
+        return isRented;
+    }
+    
+    public void rent() {
+        System.out.println("Books rented: ");
+        if(!isRented) {
+            isRented = true;
+            System.out.println("Books rented: ");
+        }
+    }
+    
+    public void display() {
+        System.out.println(title + " " + author + " " + yearPublished); 
+    }
+}
