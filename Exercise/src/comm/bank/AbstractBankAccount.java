@@ -13,15 +13,8 @@ public abstract class AbstractBankAccount implements BankAccount {
      *
      */
     public AbstractBankAccount() {
-        balance = 0;
-        isFrozen = false;
-    }
-    /**
-     *
-     * @param amount
-     */
-    public void setBalance(final double amount) {
-        balance = amount;
+        this.balance = 0;
+        this.isFrozen = false;
     }
     /**
      *
@@ -33,7 +26,7 @@ public abstract class AbstractBankAccount implements BankAccount {
             System.out.println("Cannot Deposit");
             return;
          } else if (amount > 0) {
-            setBalance(amount + getBalance());
+            this.balance += amount;
             System.out.println("Deposited: Php " + amount);
             return;
          } else {
@@ -41,6 +34,7 @@ public abstract class AbstractBankAccount implements BankAccount {
          }
     }
     /**
+     *
      * @param amount
      */
     public void withdraw(final double amount) {
@@ -48,12 +42,12 @@ public abstract class AbstractBankAccount implements BankAccount {
            System.out.println("Account is Frozen");
            System.out.println("Cannot Withdraw");
            return;
-        } else if (amount <= getBalance() && amount > 0) {
-           setBalance(getBalance() - amount);
+        } else if (amount <= this.balance && amount > 0) {
+           this.balance -= amount;
            System.out.println("Withdrawn: Php " + amount);
            return;
         } else {
-           if (amount > getBalance()) {
+           if (amount > this.balance) {
              System.out.println("Insufficient Balance");
              return;
            }
@@ -64,27 +58,27 @@ public abstract class AbstractBankAccount implements BankAccount {
      * @return balance;
      */
     public double getBalance() {
-        return balance;
+        return this.balance;
     }
     /**
      *
      * @return isFrozen
      */
     public boolean isFrozen() {
-        return isFrozen;
+        return this.isFrozen;
     }
     /**
      *
      */
     void freezeAccount() {
+        this.isFrozen = true;
         System.out.println("Account has been frozen");
-        isFrozen = true;
     }
     /**
      *
      */
     void unfreezeAccount() {
+        this.isFrozen = false;
         System.out.println("Account has been unfrozen");
-        isFrozen = false;
     }
 }
