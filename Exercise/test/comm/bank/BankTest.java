@@ -16,11 +16,10 @@ class BankTest {
         System.setOut(new PrintStream(outContent));
     }
     @Test
-    void testAccountCreation_WhenInstatiatingAccountObject_Name() {
+    void testAccountCreation_ReturnName() {
         SavingsAccount account = new SavingsAccount("Shahib Alu Akbar");
         String output = account.getOwnerName();
         String expected = "Shahib Alu Akbar";
-        
         assertEquals(expected, output);
     }
     @Test
