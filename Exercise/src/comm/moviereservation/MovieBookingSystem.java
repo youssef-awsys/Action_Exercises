@@ -1,0 +1,127 @@
+package comm.moviereservation;
+
+import java.util.ArrayList;
+
+public class MovieBookingSystem extends BookingSystem {
+    /**
+     * Array list of movie show times and available tickets.
+     */
+    private static ArrayList<Movie> show = new ArrayList<>();
+    /**
+     * Adding movies in the array show.
+     */
+    public MovieBookingSystem() {
+        final int maxTicketsFor10AM = 50;
+        final int maxTicketsFor1PM = 50;
+        show.add(new Movie("10:00 AM", maxTicketsFor10AM));
+        show.add(new Movie("1:00 PM", maxTicketsFor1PM));
+    }
+    /**
+     * Checks the availability of each show time.
+     * @param showTime
+     * @return i if show time found and has available tickets,
+     * -1 if no show time found.
+     */
+    public boolean checkAvailability(final String showTime) {
+        Movie movie = getMovieByShowTime(showTime);
+        if (movie != null && movie.getAvailableTickets() > 0) {
+            return true;
+        }
+        return false;
+    }
+    /**
+     * Books a ticket for a specified show time.
+     * @param showTime
+     * @param tickets
+     */
+    public void bookTicket(final String showTime, final int tickets) {
+        Movie movie = getMovieByShowTime(showTime);
+        if (!checkAvailability(showTime)) {
+            System.out.println("Showtime not found!");
+            return;
+        }
+        if (movie.getAvailableTickets() < tickets) {
+            System.out.println(
+                    "Not enough tickets available for this showtime");
+            return;
+        }
+        movie.setAvailableTickets(
+                movie.getAvailableTickets() - tickets);
+        movie.setBookedTickets(
+                movie.getBookedTickets() + tickets);
+        System.out.println(tickets
+                + " tickets successfully booked for "
+                + showTime);
+    }
+    /**
+     * Cancel reserved ticket for a specified show time.
+     * @param showTime
+     * @param tickets
+     */
+    public void cancelReservation(final String showTime, final int tickets) {
+        Movie movie = getMovieByShowTime(showTime);
+        if (!checkAvailability(showTime)) {
+            System.out.println("Showtime not found!");
+            return;
+        }
+        if (movie.getBookedTickets() < tickets) {
+            System.out.println("Invalid operation "
+                    + "(Attempt to cancel more tickets than booked)");
+            return;
+        }
+        movie.setAvailableTickets(
+                movie.getAvailableTickets() + tickets);
+        movie.setBookedTickets(
+                movie.getBookedTickets() - tickets);
+        System.out.println(tickets
+                + " tickets successfully cancelled for "
+                + showTime);
+    }
+    /**
+     * Display available shows with available tickets.
+     */
+    public void displayAvailableShows() {
+        System.out.println("Available Shows: ");
+        for (Movie movie : show) {
+            System.out.println(movie.getShowTime()
+                    + " - " + movie.getAvailableTickets()
+                    + " Ticket Available");
+        }
+    }
+    /**
+     * Will get the object movie based on showTime.
+     * @param showTime
+     * @return movie
+     */
+    public Movie getMovieByShowTime(final String showTime) {
+        for (Movie movie : show) {
+            if (movie.getShowTime().equalsIgnoreCase(showTime)) {
+                return movie;
+            }
+        }
+        return null;
+    }
+    /**
+     * Clear movie array for JUNIT testing.
+     */
+    static void resetShows() {
+        show.clear();
+    }
+    /**
+     * Main function.
+     * @param args
+     */
+    public static void main(final String[] args) {
+        final int fiveTicket = 5;
+        final int hundredTicket = 100;
+        final int threeTicket = 3;
+        final int twoTicket = 2;
+        MovieBookingSystem movie = new MovieBookingSystem();
+        movie.bookTicket("10:00 AM", fiveTicket);
+        movie.bookTicket("10:00 AM", hundredTicket);
+        movie.cancelReservation("10:00 AM", threeTicket);
+        movie.bookTicket("1:00 PM", twoTicket);
+        movie.cancelReservation("1:00 PM", fiveTicket);
+        movie.displayAvailableShows();
+    }
+}
