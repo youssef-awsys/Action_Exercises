@@ -7,11 +7,12 @@ public class MovieBookingSystem extends BookingSystem {
      * Array list of movie show times and available tickets.
      */
     private static ArrayList<Movie> show = new ArrayList<>();
+    //Add description for documentation purposes.
     /**
-     *
+     * Time comparator to check if time is valid.
      */
     private static final String TIME_REGEX =
-            "^(0?[1-9]|1[0-2]):[0-5][0-9]\\s?(AM|PM)$";
+            "^(0?[1-9]|1[0-2]):[0-5][0-9]\\s?(?i)(AM|PM)$";
     /**
      * Adding movies in the array show.
      */
@@ -44,8 +45,18 @@ public class MovieBookingSystem extends BookingSystem {
             System.out.println("Error: Invalid showTime format.");
             return;
         }
-        Movie movie = getMovieByShowTime(showTime);
-        if (!checkAvailability(showTime)) {
+        if (tickets <= 0) {
+            System.out.println("Invalid ticket number");
+            return;
+        }
+        String showTimeInput = showTime;
+        String[] parts = showTimeInput .split("[:\\s]");
+        int hour = Integer.parseInt(parts[0]);   // 1 or 01 → 1
+        String minute = parts[1];                // 00–59
+        String period = parts[2].toUpperCase();  // AM or PM
+        String formattedShowTime = hour + ":" + minute + " " + period;
+        Movie movie = getMovieByShowTime(formattedShowTime);
+        if (!checkAvailability(formattedShowTime)) {
             System.out.println("Showtime not found!");
             return;
         }
@@ -72,8 +83,19 @@ public class MovieBookingSystem extends BookingSystem {
             System.out.println("Error: Invalid showTime format.");
             return;
         }
-        Movie movie = getMovieByShowTime(showTime);
-        if (!checkAvailability(showTime)) {
+        if (tickets <= 0) {
+            System.out.println("Invalid ticket number");
+            return;
+        }
+        String showTimeInput = showTime;
+        String[] parts = showTimeInput .split("[:\\s]");
+        int hour = Integer.parseInt(parts[0]);   // 1 or 01 → 1
+        String minute = parts[1];                // 00–59
+        String period = parts[2].toUpperCase();  // AM or PM
+        String formattedShowTime = hour + ":" + minute + " " + period;
+
+        Movie movie = getMovieByShowTime(formattedShowTime);
+        if (!checkAvailability(formattedShowTime)) {
             System.out.println("Showtime not found!");
             return;
         }
@@ -131,6 +153,12 @@ public class MovieBookingSystem extends BookingSystem {
         final int twoTicket = 2;
         MovieBookingSystem movie = new MovieBookingSystem();
         movie.displayAvailableShows();
+        //Better if regex implementation should be clear since it
+        //compares string values (e.g. 1:00 PM)
+        //an display error format for "01:00 PM"
+        movie.bookTicket("01:00 PM", twoTicket);
+        //Booking and Cancellation of reservation should not allow 0
+        //or negative values
         movie.bookTicket("10:00 AM", fiveTicket);
         movie.bookTicket("10:00 AM", hundredTicket);
         movie.cancelReservation("10:00 AM", threeTicket);
