@@ -58,7 +58,7 @@ class MovieReservationTest {
         assertTrue(output.contains("tickets successfully booked"));
     }
     @Test
-    void testCancelReservation_withInvalidShowTime_ReturnNoShowtime() {
+    void testCancelReservation_withShowTimeNotExisting_ReturnNoShowtime() {
         MovieBookingSystem book = new MovieBookingSystem();
         book.bookTicket("1:00 PM", 2);
         book.cancelReservation("12:00 PM", 2);
@@ -67,12 +67,27 @@ class MovieReservationTest {
         assertTrue(output.contains("Showtime not found!")); 
     }
     @Test
-    void testBookTickets_withInvalidShowTime_ReturnNoShowtime() {
+    void testBookTickets_withShowTimeNotExisting_ReturnNoShowtime() {
         MovieBookingSystem book = new MovieBookingSystem();
-        book.bookTicket("12:00 PM", 2);
+        book.bookTicket("12:00 PM", 5);
         String output = outContent.toString();
         assertFalse(book.checkAvailability("12:00 PM"));
         assertTrue(output.contains("Showtime not found!")); 
+    }
+    @Test
+    void testCancelReservation_withInvalidShowTime_ReturnInvalidFormat() {
+        MovieBookingSystem book = new MovieBookingSystem();
+        book.bookTicket("1:00 PM", 2);
+        book.cancelReservation("TenOclockAM", 2);
+        String output = outContent.toString();
+        assertTrue(output.contains("Error: Invalid showTime format.")); 
+    }
+    @Test
+    void testBookTickets_withInvalidShowTime_ReturnInvalidFormat() {
+        MovieBookingSystem book = new MovieBookingSystem();
+        book.bookTicket("TenOclockAM", 5);
+        String output = outContent.toString();
+        assertTrue(output.contains("Error: Invalid showTime format.")); 
     }
     @Test
     void testBookingReservation_withMoreTicketsThanBooked_ReturnInvalidOperation() {

@@ -8,6 +8,11 @@ public class MovieBookingSystem extends BookingSystem {
      */
     private static ArrayList<Movie> show = new ArrayList<>();
     /**
+     *
+     */
+    private static final String TIME_REGEX =
+            "^(0?[1-9]|1[0-2]):[0-5][0-9]\\s?(AM|PM)$";
+    /**
      * Adding movies in the array show.
      */
     public MovieBookingSystem() {
@@ -19,8 +24,8 @@ public class MovieBookingSystem extends BookingSystem {
     /**
      * Checks the availability of each show time.
      * @param showTime
-     * @return i if show time found and has available tickets,
-     * -1 if no show time found.
+     * @return true if show time found and has available tickets,
+     * false if no show time found.
      */
     public boolean checkAvailability(final String showTime) {
         Movie movie = getMovieByShowTime(showTime);
@@ -35,6 +40,10 @@ public class MovieBookingSystem extends BookingSystem {
      * @param tickets
      */
     public void bookTicket(final String showTime, final int tickets) {
+        if (!showTime.matches(TIME_REGEX)) {
+            System.out.println("Error: Invalid showTime format.");
+            return;
+        }
         Movie movie = getMovieByShowTime(showTime);
         if (!checkAvailability(showTime)) {
             System.out.println("Showtime not found!");
@@ -59,6 +68,10 @@ public class MovieBookingSystem extends BookingSystem {
      * @param tickets
      */
     public void cancelReservation(final String showTime, final int tickets) {
+        if (!showTime.matches(TIME_REGEX)) {
+            System.out.println("Error: Invalid showTime format.");
+            return;
+        }
         Movie movie = getMovieByShowTime(showTime);
         if (!checkAvailability(showTime)) {
             System.out.println("Showtime not found!");
@@ -117,11 +130,16 @@ public class MovieBookingSystem extends BookingSystem {
         final int threeTicket = 3;
         final int twoTicket = 2;
         MovieBookingSystem movie = new MovieBookingSystem();
+        movie.displayAvailableShows();
         movie.bookTicket("10:00 AM", fiveTicket);
         movie.bookTicket("10:00 AM", hundredTicket);
         movie.cancelReservation("10:00 AM", threeTicket);
         movie.bookTicket("1:00 PM", twoTicket);
         movie.cancelReservation("1:00 PM", fiveTicket);
+        movie.bookTicket("TenOclockAM", fiveTicket);
+        movie.cancelReservation("TenOclockAM", fiveTicket);
+        movie.bookTicket("12:00 AM", fiveTicket);
+        movie.cancelReservation("12:00 PM", fiveTicket);
         movie.displayAvailableShows();
     }
 }
