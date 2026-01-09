@@ -42,8 +42,7 @@ public interface BankAccount {
      */
     void unfreezeAccount();
     /**
-     * Returns an unmodifiable list of all
-     * transactions performed on the account.
+     * Returns the list of the transaction history.
      * @return list
      */
     List<Transaction> getTransactionHistory();

@@ -3,14 +3,16 @@ package comm.bank;
 import java.util.List;
 
 public final class Main {
+    //Add description for documentation purposes
     /**
-     *
+     * Constructor of main function with super.
      */
     private Main() {
         super();
     }
+    //Add main function description
     /**
-     *
+     * This is the main entry point of the Bank Account System.
      * @param args
      */
     public static void main(final String[] args) {
